@@ -128,7 +128,7 @@ for (i in 1 : length(Zs$tag)) {
   if(debug>0 ){
      print( paste( Zs$tag[i], "mean:", mean(sub$freq), "sd:", sd(sub$freq) ))  
   } 
-  Zs$Z[i] = Zs$freq[i] - mean(sub$freq) / sd(sub$freq)
+  Zs$Z[i] = ( Zs$freq[i] - mean(sub$freq) )/ sd(sub$freq)
 }
 ```
 
