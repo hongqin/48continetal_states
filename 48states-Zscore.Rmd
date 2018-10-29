@@ -146,7 +146,7 @@ Zs = cbind( Zs, tmp2)
 cats = sort( unique( c(as.character(Zs$c1), as.character(Zs$c2))))
 Zmat = matrix(NA, ncol=length(cats), nrow=length(cats))
 names(Zmat) = cats; 
-colnames(Zmat) = cats; 
+rownames(Zmat) = cats; 
 for (i in 1:length(cats)){#row
   for (  j in 1:length(cats)) { #column
     tmp = sort(c(i, j))
