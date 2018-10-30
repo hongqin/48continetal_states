@@ -93,8 +93,10 @@ F.obs
 #load MS02 null networks
 ```{r}
 ms02files = list.files(path='48statesMS02')
-F.ms02 = data.frame(matrix(data=NA, nrow=1, ncol=3))
+F.ms02 = data.frame(matrix(data=NA, nrow=1, ncol=3)) #buffer
 names(F.ms02) = c('tag', 'freq', 'file')
+
+#file = "_ms02_48states.46.csv"
 for (file in ms02files ){
   if ( debug > 0 ) { print(file) }
   ms02_pairs= read.csv(paste("48statesMS02/", file, sep=''))
@@ -104,7 +106,8 @@ for (file in ms02files ){
   
   tags2 = t(apply(ms02_pairs[,c("state1bin", "state2bin")], 1, sort))
   ms02_pairs$tag = paste( tags2[,1], tags2[,2], sep='_')
-  F.ms02current = data.frame( table(ms02_pairs$tag))
+
+  F.ms02current = data.frame( table(ms02_pairs$tag)) #Current buffer
   F.ms02current$file = file
   names(F.ms02current) = c('tag', 'freq', 'file')
   F.ms02 =  data.frame( rbind(F.ms02, data.frame(F.ms02current)) )
@@ -129,7 +132,7 @@ for (i in 1 : length(Zs$tag)) {
   if(debug>0 ){
      print( paste( Zs$tag[i], "mean:", mean(sub$freq), "sd:", sd(sub$freq) ))  
   } 
-  Zs$Z[i] = ( Zs$freq[i] - mean(sub$freq) )/ sd(sub$freq)
+  Zs$Z[i] = ( Zs$freq[i] - mean(sub$freq) )/ max( sd(sub$freq), 0.5)
 }
 ```
 
@@ -161,7 +164,7 @@ for (i in 1:length(cats)){#row
 #heatmap
 ```{r}
 par(mar=c(0,0,0,0))
-heatmap_2(as.matrix(Zmat),scale="none", Rowv=NA, Colv =NA, legend=1, do.dendro=c(F,F), col=RGBColVec(64));
+heatmap_2(as.matrix(-1*Zmat),scale="none", Rowv=NA, Colv =NA, legend=1, do.dendro=c(F,F), col=RGBColVec(64));
 ```
 
 ```{r}
