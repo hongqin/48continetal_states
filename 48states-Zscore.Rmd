@@ -144,7 +144,7 @@ Zs = cbind( Zs, tmp2)
 ```{r}
 #unique categories
 cats = sort( unique( c(as.character(Zs$c1), as.character(Zs$c2))))
-Zmat = matrix(NA, ncol=length(cats), nrow=length(cats))
+Zmat = data.frame(matrix(NA, ncol=length(cats), nrow=length(cats)))
 names(Zmat) = cats; 
 rownames(Zmat) = cats; 
 for (i in 1:length(cats)){#row
@@ -160,11 +160,13 @@ for (i in 1:length(cats)){#row
 #heatmap
 ```{r}
 library(Heatplus)
-heatmap_2(Zmat,scale="none", legend=1, do.dendro=c(F,F), col=RGBColVec(64));
+
+par(mar=c(0,0,0,0))
+heatmap_2(as.matrix(Zmat),scale="none", Rowv=FALSE, Colv = FALSE, legend=1, do.dendro=c(F,F), col=RGBColVec(64));
 
 ```
 
 ```{r}
-heatmap_2(Zmat, legend=1, legfrac=10)
+#heatmap_2(Zmat, legend=1, legfrac=10)
 ```
 
