@@ -8,6 +8,7 @@ output: html_document
 ```{r}
 rm(list=ls())
 debug = 1
+library(Heatplus)
 library(igraph)
 state_pairs= read.csv("48states.csv")
 states = read.csv("state_year.csv")
@@ -159,11 +160,8 @@ for (i in 1:length(cats)){#row
 
 #heatmap
 ```{r}
-library(Heatplus)
-
 par(mar=c(0,0,0,0))
-heatmap_2(as.matrix(Zmat),scale="none", Rowv=FALSE, Colv = FALSE, legend=1, do.dendro=c(F,F), col=RGBColVec(64));
-
+heatmap_2(as.matrix(Zmat),scale="none", Rowv=NA, Colv =NA, legend=1, do.dendro=c(F,F), col=RGBColVec(64));
 ```
 
 ```{r}
