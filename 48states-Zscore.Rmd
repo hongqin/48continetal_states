@@ -8,7 +8,7 @@ output: html_document
 ```{r}
 rm(list=ls())
 debug = 1
-library(Heatplus)
+library(gplots)
 library(igraph)
 state_pairs= read.csv("48states.csv")
 states = read.csv("state_year.csv")
@@ -163,8 +163,19 @@ for (i in 1:length(cats)){#row
 
 #heatmap
 ```{r}
-par(mar=c(0,0,0,0))
-heatmap_2(as.matrix(-1*Zmat),scale="none", Rowv=NA, Colv =NA, legend=1, do.dendro=c(F,F), col=RGBColVec(64));
+
+library(gplots)
+#colors = c(seq(min(Zmat),-10.1,length=100),seq(-9.9,9.9,length=100),seq(10.1,max(Zmat),length=100))
+my_palette <- colorRampPalette(c("blue2", "white", "red2"))(n = 299)
+
+heatmap.2( as.matrix(Zmat), col=my_palette, scale="none", trace='none',
+          # margins = c(5,4), key.title = NA, 
+          dendrogram = "none", Rowv = FALSE, Colv = FALSE
+           ,key.xlab="Z-score", key.ylab=NA,
+          )
+
+#par(mar=c(0,0,0,0))
+#heatmap.2(as.matrix(-1*Zmat),scale="none", Rowv=NA, Colv =NA, legend=1, do.dendro=c(F,F), col=RGBColVec(64));
 ```
 
 ```{r}
