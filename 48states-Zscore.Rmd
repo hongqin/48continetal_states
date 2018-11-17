@@ -168,9 +168,11 @@ library(gplots)
 #colors = c(seq(min(Zmat),-10.1,length=100),seq(-9.9,9.9,length=100),seq(10.1,max(Zmat),length=100))
 my_palette <- colorRampPalette(c("blue2", "white", "red2"))(n = 299)
 
-heatmap.2( as.matrix(Zmat), col=my_palette, scale="none", trace='none',
+heatmap.2( as.matrix(Zmat), col=my_palette, scale="none", trace='none', 
           # margins = c(5,4), key.title = NA, 
-          dendrogram = "none", Rowv = FALSE, Colv = FALSE
+          #dendrogram = "no", 
+           #Rowv = FALSE, 
+           #Colv = FALSE
            ,key.xlab="Z-score", key.ylab=NA,
           )
 
