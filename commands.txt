@@ -1,4 +1,4 @@
-for i in {101..102}
+for i in {101..1000}
 do
   R -f ms02_driver_20180523.R --args 48states.csv 48statesMS02/_ms02_48states.$i.csv 100 0.025 9 
 done
