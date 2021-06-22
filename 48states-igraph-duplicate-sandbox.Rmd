@@ -1,0 +1,48 @@
+---
+title: "48states"
+author: "H Qin"
+date: "06/22/2021"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+library(igraph)
+state_pairs= read.csv("48states.csv")
+states = read.csv("state_year.csv")
+```
+
+# convert long names to 2 letter
+```{r}
+state_pairs$state1A = states$abbr[match( state_pairs$state1, states$state)]
+state_pairs$state2A = states$abbr[match( state_pairs$state2, states$state)]
+```
+
+```{r}
+g = graph.data.frame(state_pairs[, 3:4], directed=F)
+g.degree = degree(g)
+g.degree [g.degree == max(g.degree)] #TN and MO have 8 bordering states
+```
+
+
+```{r}
+plot(g)
+```
+
+# convert Grapth to pairwise format in datafreame
+```{r}
+df <- get.data.frame(g)
+head(df)
+```
+
+a function to remove a state
+
+```{r}
+remove_a_node_from_df = function (df_in){
+  
+  
+  
+}
+
+```
+
